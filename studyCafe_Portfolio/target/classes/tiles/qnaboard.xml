@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+       
+<!-- qnaboard관련 tiles xml -->
+<!--  
+	<definition 
+		name="정의명.여기에서는 모든 definition요소의 기본골격을 의미" 
+		template="실제로 존재하는 view문서의 경로와 파일명"> 
+		value="실제로 존재하는 view문서의 경로와 파일명">  value도 template동일-->
+<tiles-definitions>
+
+	<definition name="qna/listQna" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/listQna.jsp"/>
+	</definition>
+	
+	<definition name="qna/readQna" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/readQna.jsp"/>
+	</definition>
+	
+	<definition name="qna/writeForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/writeForm.jsp"/>
+	</definition>
+	
+	<definition name="qna/modifyForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/modifyForm.jsp"/>
+	</definition>
+	
+	<definition name="qna/checkpw" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/checkpw.jsp"/>
+	</definition>
+	
+</tiles-definitions>

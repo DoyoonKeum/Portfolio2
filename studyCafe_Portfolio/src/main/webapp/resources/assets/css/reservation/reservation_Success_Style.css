@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body{
+	font-family: sans-serif;
+}
+
+.container{
+	width:500px;
+	margin: 130px auto;	
+}
+
+h4{
+	color: #202124;
+	
+}
+
+.main{
+	background-color: #1d3124;
+	width: 245px;
+	height: 40px;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+	line-height: 40px;
+}

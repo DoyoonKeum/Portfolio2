@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="history/historyList" extends="baseLayout">     
+	  	<put-attribute  name="body"   
+		              value="/WEB-INF/views/history/historyList.jsp"/> 
+	</definition>
+	
+	<definition name="history/historyOne" extends="baseLayout">     
+	  	<put-attribute  name="body"   
+		              value="/WEB-INF/views/history/historyOne.jsp"/>
+	</definition>
+	
+	<definition name="history/chargeMoney" extends="baseLayout">     
+	  	<put-attribute  name="body"
+		              value="/WEB-INF/views/history/chargeMoney.jsp"/>
+	</definition>
+	
+	<definition name="history/chargeMoney999" extends="baseLayout">
+	  	<put-attribute  name="body"   
+		              value="/WEB-INF/views/history/chargeMoney999.jsp"/>
+	</definition>
+	
+	<definition name="seat/seatSelect" extends="baseLayout">     
+	  	<put-attribute  name="body"   
+		              value="/WEB-INF/views/seat/seatSelect.jsp"/>
+	</definition>
+	
+	<definition name="seat/changeSeat" extends="baseLayout">     
+	  	<put-attribute  name="body"
+		              value="/WEB-INF/views/seat/changeSeat.jsp"/>
+	</definition>
+	
+	<definition name="/member/login" extends="baseLayout">     
+	  	<put-attribute  name="body"
+		              value="/WEB-INF/views/member/login.jsp"/>
+	</definition>
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+.container {
+  overflow: hidden;
+}
+
+.filterDiv {
+  float: left;
+  width: 287px; 
+  text-align: center;
+  margin: 5px 5px;
+  display: none; /* Hidden by default */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+div.filterDiv:hover {
+		border: 1px solid #777;
+	}
+	
+	div.filterDiv img {
+		width: 100%;
+		height: 200px;
+		border-bottom: 1px solid #ccc;
+	}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #aaa;
+  cursor: pointer;
+  width : 130px;
+  height : 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  border-radius: 15px;
+  color : white;
+}
+
+/* Add a light grey background on mouse-over */
+.btn:hover {
+  background-color: #ddd;
+}
+
+/* Add a dark background to the active button */
+.btn.active {
+  background-color: #FFE08C;
+  color: black;
+}
+#myBtnContainer{
+	text-align: center;
+}

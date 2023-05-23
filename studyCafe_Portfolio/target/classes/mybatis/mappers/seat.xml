@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.seat">
+
+	<!--  전체 게시물 수 조회 -->
+	<select id="userInfo" resultType="com.studycafe.user.domain.User" parameterType="java.lang.String">
+		<![CDATA[select * from user_info where u_id = #{id}]]>
+	</select>
+	
+	<select id="seatList" resultType="com.studycafe.seat.domain.Seat">
+		<![CDATA[select * from seat]]>
+	</select>
+	
+	<select id="historySelect" resultType="com.studycafe.seat.domain.History" parameterType="int">
+		<![CDATA[select * from history where h_number=#{hno}]]>
+	</select>
+
+	<update id="choiceSeat"  parameterType="int">
+		<![CDATA[update seat set s_isusing=1 where s_number=#{seatNumber}]]>
+	</update>
+	
+	<update id="cancelSeat" parameterType="int">
+		<![CDATA[update seat set s_isusing=0 where s_number=#{seatNumber}]]>
+	</update>
+	
+	<select id="findBySeat" resultType="com.studycafe.seat.domain.Seat" parameterType="int">
+		<![CDATA[select * from seat where s_number=#{seatNumber}]]>
+	</select>
+	
+	<update id="addUpdateHistory" parameterType="com.studycafe.seat.domain.History">
+		<![CDATA[update history set h_isusing=${h_isUsing} where h_number=#{h_number}]]>
+	</update>
+	
+	<update id="removeUpdateHistory" parameterType="com.studycafe.seat.domain.History">
+		<![CDATA[update history set h_isusing=${h_isUsing} where h_number=#{h_number}]]>
+	</update>
+
+</mapper>

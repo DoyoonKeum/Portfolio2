@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mapper.roomreservation">
+ 
+  	<resultMap type="roomreservation"  
+	           id="roomreservationResult">
+		<!-- <result property="필드명"  column="컬럼명"/>	 -->
+		<result property="rs_number"  column="rs_number"/>	
+		<result property="u_number"  column="u_number"/>	
+		<result property="r_number"  column="r_number"/>	
+		<result property="rs_date"  column="rs_date"/>	
+		<result property="rs_time1"  column="rs_time1"/>
+		<result property="rs_time2"  column="rs_time2"/>
+		<result property="rs_time3"  column="rs_time3"/>
+		<result property="rs_time4"  column="rs_time4"/>
+		<result property="rs_time5"  column="rs_time5"/>
+		<result property="rs_time6"  column="rs_time6"/>
+		<result property="u_name"  column="u_name"/>
+		<result property="r_price"  column="r_price"/>
+		<result property="rs_price"  column="rs_price"/>
+		<result property="u_tell"  column="u_tell"/>
+			
+	</resultMap>
+	
+<!-- 	
+	  	<resultMap type="roomreservation2"  
+	         		id="roomreservationResult2">
+		<result property="필드명"  column="컬럼명"/>	
+		<result property="rs_time1"  column="rs_time1"/>
+		<result property="rs_time2"  column="rs_time2"/>
+		<result property="rs_time3"  column="rs_time3"/>
+		<result property="rs_time4"  column="rs_time4"/>
+		<result property="rs_time5"  column="rs_time5"/>
+		<result property="rs_time6"  column="rs_time6"/>
+	</resultMap> -->
+ 
+	<!-- 예약하기  -->
+	<insert id="insertRoomReservation"  parameterType="com.studycafe.reservation.domain.RoomReservation">
+		<![CDATA[
+		insert into room_reservation(rs_number,u_number,r_number,rs_date,rs_time1, rs_time2, rs_time3, rs_time4,
+										rs_time5, rs_time6, u_name,r_price,rs_price,u_tell)
+		values(rs_seq.nextval,#{u_number},#{r_number},#{rs_date},#{rs_time1,jdbcType=VARCHAR},#{rs_time2,jdbcType=VARCHAR},#{rs_time3,jdbcType=VARCHAR},#{rs_time4,jdbcType=VARCHAR},
+				#{rs_time5,jdbcType=VARCHAR},#{rs_time6,jdbcType=VARCHAR},#{u_name},#{r_price},#{rs_price},#{u_tell})
+		]]>
+	</insert>
+
+	<!-- 전체 예약 조회 -->
+	<select id="getAllReservationConfirm"
+			resultMap="roomreservationResult">
+ 	<![CDATA[	
+	select * from room_reservation
+  	]]>
+	</select>
+
+
+	<!-- 내 예약 조회 -->
+	<select id="getReservationConfirm"
+			resultMap="roomreservationResult"
+	        parameterType="int">
+ 	<![CDATA[	
+	select * from room_reservation
+	where u_number= #{u_number}
+	order by  rs_date ASC
+  	]]>
+	</select>
+	
+	<!-- 날짜별 예약상황조회 101번방 -->
+	<select id="timeCheckA"
+			resultMap="roomreservationResult"
+	        parameterType="String">
+ 	<![CDATA[	
+	select r_number, rs_time1,rs_time2,rs_time3,rs_time4,rs_time5,rs_time6 
+	from room_reservation
+	where rs_date = #{rs_date} and r_number=101
+  	]]>
+	</select>
+	
+	<!-- 날짜별 예약상황조회 102번방 -->
+	<select id="timeCheckB"
+			resultMap="roomreservationResult"
+	        parameterType="String">
+ 	<![CDATA[	
+	select r_number, rs_time1,rs_time2,rs_time3,rs_time4,rs_time5,rs_time6 
+	from room_reservation
+	where rs_date = #{rs_date} and r_number=102
+  	]]>
+	</select>
+	
+ 	<!-- 날짜별 예약상황조회 103번방 -->
+	<select id="timeCheckC"
+			resultMap="roomreservationResult"
+	        parameterType="String">
+ 	<![CDATA[	
+	select r_number, rs_time1,rs_time2,rs_time3,rs_time4,rs_time5,rs_time6 
+	from room_reservation
+	where rs_date = #{rs_date} and r_number=103
+  	]]>
+	</select>
+	
+	<!-- 날짜별 예약상황조회 104번방 -->
+	<select id="timeCheckD"
+			resultMap="roomreservationResult"
+	        parameterType="String">
+ 	<![CDATA[	
+	select r_number, rs_time1,rs_time2,rs_time3,rs_time4,rs_time5,rs_time6 
+	from room_reservation
+	where rs_date = #{rs_date} and r_number=104
+  	]]>
+	</select>
+</mapper>    
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+

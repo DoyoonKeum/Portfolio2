@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!-- 글관련 화면 -->
+<!-- definition
+		name="정의명. 여기에서는 모든 definition요소의 기본골격을 의미 "
+		template"실제로 존재하는 view문서의 경로와 파일명"
+	 -->
+
+<tiles-definitions>
+
+	<definition name="article/articleList" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/articleList.jsp"/>
+	</definition>
+	<definition name="article/articleDetail" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/articleDetail.jsp"/>
+	</definition>
+	<definition name="article/searchTitle" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/searchTitle.jsp"/>
+	</definition>
+	<definition name="article/addArticleForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/addArticleForm.jsp"/>
+	</definition>
+	<definition name="article/modifyArticleForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/modifyArticleForm.jsp"/>
+	</definition>
+	<definition name="article/articleModiComment" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/articleModiComment.jsp"/>
+	</definition>
+</tiles-definitions>

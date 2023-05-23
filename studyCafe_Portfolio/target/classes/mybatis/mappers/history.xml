@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.history">
+	
+	<select id="hisList" resultType="com.studycafe.seat.domain.History">
+		<![CDATA[select * from history where h_isusing>0]]>
+	</select>
+	
+	<update id="insertMoney" parameterType="com.studycafe.seat.domain.History">
+		<![CDATA[update history set h_wallet=#{h_wallet} where h_number=#{h_number}]]>
+	</update>
+	
+	<select id="historySelect" resultType="com.studycafe.seat.domain.History" parameterType="int">
+		<![CDATA[select * from history where h_number=#{hno}]]>
+	</select>
+	
+
+	<update id="updateMoney" parameterType="com.studycafe.seat.domain.History">
+		<![CDATA[update history set h_wallet=#{h_wallet} where h_number=#{h_number}]]>
+	</update>
+	
+	<select id="historySearch" parameterType="java.lang.String" resultType="com.studycafe.seat.domain.History" >
+		<![CDATA[select * from history where h_userId=#{id}]]>
+	</select>
+</mapper>

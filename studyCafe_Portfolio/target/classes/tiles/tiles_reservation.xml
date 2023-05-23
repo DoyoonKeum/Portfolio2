@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- tiles_goods.xml : 상품관련 페이지 설정-->
+<!-- 
+	<definition 
+	      name="Controller의 요청메서드에서 지정해주는 이름" 
+	      extends="baseLayout이라는 definition이름을 가진 요소를 확장.그대로 물려받음">     
+	  <put-attribute 
+		   name="definition이름"   
+		   value="실제로 존재하는 view문서의 경로와 파일명"/> 
+	</definition>     -->
+<tiles-definitions>
+
+	<definition name="reservationMain" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Main.jsp"/>
+	</definition>
+	
+	<definition name="reservationDetailA" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Detail_A.jsp"/>
+	</definition>
+	
+	<definition name="reservationDetailB" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Detail_B.jsp"/>
+	</definition>	
+
+	<definition name="reservationDetailC" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Detail_C.jsp"/>
+	</definition>
+	
+	<definition name="reservationDetailD" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Detail_D.jsp"/>
+	</definition>		
+
+	<definition name="reservationSuccess" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Success.jsp"/>
+	</definition>		
+	
+	<definition name="reservationConfirm" extends="baseLayout">     
+      <put-attribute name="body" value="/WEB-INF/views/reservation/reservation_Confirm.jsp"/>
+	</definition>			
+
+
+	
+
+</tiles-definitions>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.qna">
+
+	<!-- 
+	이런 타입은 MyBatis에 내장된(built-in) typeAlias 이기 때문에 modelConfig.xml에 등록하지 않고도 바로 사용 가능
+	- java.lang.Integer => int
+	- java.lang.String => string
+	
+	다른종류는 modelConfig.xml에 등록해줘야 한다.
+	<typeAlias type="com.ourcom.app3.domain.Article" alias="article"/>
+	대신 action-mybatis.xml에서 modelConfig.xml 사용가능하도록 주석 해제 필요.
+	-->
+	
+	<!-- select 요소  : select 쿼리문 실행
+		 id속성 : unique해야한다. 각 요소를 구분하기 위한 용도 -->
+	<!-- 전체 게시물수 조회 -->
+	<select id="qnaTotalCnt" resultType="java.lang.Integer">
+	  <![CDATA[
+		select count(*) from qna_board where q_isshow='Y'
+	  ]]>
+	</select>
+	
+	<select id="qnaAllList" resultType="com.studycafe.qna.domain.Qna" parameterType="com.studycafe.qna.domain.Page">
+	  <![CDATA[
+		select a.*,u.u_id from(select s.*, row_number()over(order by s.q_no desc) as num from qna_board s where q_isshow='Y')
+		a join user_info u on a.u_number=u.u_number
+		where num>#{start} and num<=#{end}
+		order by a.q_no desc
+	  ]]>
+	</select>
+	
+	<select id="qnaSearchTotalCnt" resultType="java.lang.Integer" parameterType="com.studycafe.qna.domain.SearchPage">
+	  <![CDATA[
+		SELECT count(q_no) count 
+		FROM
+		(SELECT A.*, ROWNUM RNUM
+		FROM(select * from  qna_board where ${choice} like '%'||#{keyword}||'%' order by q_no desc) A) where q_isshow='Y'
+	  ]]>
+	</select>
+	
+	<select id="qnaSearchAllList" resultType="com.studycafe.qna.domain.Qna" parameterType="com.studycafe.qna.domain.SearchPage">
+	  <![CDATA[
+		select a.*,u.u_id from(select s.*, row_number()over(order by s.q_no desc) as num from qna_board s where q_isshow='Y' and ${choice} like '%'||#{keyword}||'%')
+		a join user_info u on a.u_number=u.u_number
+		where num>#{start} and num<=#{end}
+		order by a.q_no desc
+	  ]]>
+	</select>
+	
+	<select id="qnaDetail" resultType="com.studycafe.qna.domain.Qna" parameterType="java.lang.Integer">
+	  <![CDATA[
+		select q_no, q_writer, q_title, q_content, q_regdate, q_moddate, q_cnt, q_isopen, q_openpw, q_isshow, q_chk, u_number
+		from qna_board
+		where q_isshow='Y' and q_no=#{no}
+	  ]]>
+	</select>
+
+	<update id="qnaReadCnt" parameterType="java.lang.Integer">
+	  <![CDATA[
+		update qna_board
+		set q_cnt=q_cnt+1
+		where q_isshow='Y' and q_no=#{no}
+	  ]]>
+	</update>
+	
+	<insert id="qnaWrite" parameterType="com.studycafe.qna.domain.Qna">
+	  <![CDATA[
+		insert into qna_board (q_no, q_writer, q_title, q_content, q_regdate, q_moddate, q_cnt, q_isopen, q_openpw, q_isshow, q_chk, u_number)
+		values(qna_seq.NEXTVAL, #{q_writer}, #{q_title}, #{q_content}, sysdate, sysdate, 0, 'Y', null, 'Y', 1, #{u_number})
+	  ]]>
+	</insert>
+	
+	<insert id="qnaWriteWithPw" parameterType="com.studycafe.qna.domain.Qna">
+	  <![CDATA[
+		insert into qna_board (q_no, q_writer, q_title, q_content, q_regdate, q_moddate, q_cnt, q_isopen, q_openpw, q_isshow, q_chk, u_number)
+		values(qna_seq.NEXTVAL, #{q_writer}, #{q_title}, #{q_content}, sysdate, sysdate, 0, 'N', #{q_openpw}, 'Y', 1, #{u_number})
+	  ]]>
+	</insert>
+	
+	<update id="qnaModify" parameterType="com.studycafe.qna.domain.Qna">
+	  <![CDATA[
+		update qna_board
+		set q_moddate = sysdate, q_title=#{q_title}, q_content=#{q_content}
+		where q_no=#{q_no}
+	  ]]>
+	</update>
+	
+	<update id="qnaModifyWithPw" parameterType="com.studycafe.qna.domain.Qna">
+	  <![CDATA[
+		update qna_board 
+		set q_moddate = sysdate, q_title=#{q_title}, q_content=#{q_content}, q_isopen='N', q_openpw=#{q_openpw}
+		where q_no=#{q_no}
+	  ]]>
+	</update>
+	
+	
+	
+	
+	
+	<update id="qnaDelete" parameterType="java.lang.Integer">
+	  <![CDATA[
+		update qna_board
+		set q_isshow='N'
+		where q_no=#{no}
+	  ]]>
+	</update>
+	
+	<insert id="qnaWriteReply" parameterType="com.studycafe.qna.domain.QnaComment">
+	  <![CDATA[
+		insert into qna_comment (qr_no, qr_orino, qr_writer, qr_title, qr_content, qr_regdate, qr_isshow, qr_good, qr_bad)
+		values(qr_seq.NEXTVAL, #{qr_orino}, #{qr_writer}, #{qr_title}, #{qr_content}, sysdate, 'Y', 0, 0)
+	  ]]>
+	</insert>
+	
+	<select id="qnaSelectReply" resultType="com.studycafe.qna.domain.QnaComment" parameterType="java.lang.Integer">
+	  <![CDATA[
+		select qr_no, qr_orino, qr_writer, qr_title, qr_content, qr_regdate, qr_isshow, qr_good, qr_bad
+		from qna_comment where qr_orino=#{orino} and qr_isshow='Y'
+	  ]]>
+	</select>
+	
+	<update id="qnaModifyReply" parameterType="com.studycafe.qna.domain.QnaComment">
+	  <![CDATA[
+		update qna_comment
+		set qr_title=#{qr_title}, qr_content=#{qr_content}, qr_regdate=sysdate
+		where qr_isshow='Y' and qr_no=#{qr_no}
+	  ]]>	 
+	</update>
+	
+	<update id = "qnaDeleteReply" parameterType="java.lang.Integer">
+		update qna_comment set qr_isshow='N' where qr_no=#{qr_no}
+	</update> 
+	
+	<update id = "updateQnaStatus" parameterType="com.studycafe.qna.domain.Qna">
+		update qna_board set q_chk =#{q_chk} where q_no=#{q_no}
+	</update>
+	
+</mapper>
